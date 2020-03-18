@@ -28,6 +28,7 @@ public class DefaultGlobalConfig extends GlobalConfig {
         setDateType(DateType.ONLY_DATE);
         moduleNames = new HashMap<>();
         moduleNames.put(Module.mapper, modulePrefix + "mapper");
+        moduleNames.put(Module.xml, modulePrefix + "mapper");
         moduleNames.put(Module.entity, modulePrefix + "entity");
         moduleNames.put(Module.service, modulePrefix + "service");
         moduleNames.put(Module.service_impl, modulePrefix + "service-impl");

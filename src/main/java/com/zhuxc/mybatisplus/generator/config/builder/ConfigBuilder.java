@@ -129,7 +129,7 @@ public class ConfigBuilder {
         this.packageInfo.put("ModuleName", packageConfig.getModuleName());
         this.packageInfo.put("Entity", this.joinPackage(packageConfig.getParent(), packageConfig.getEntity()));
         this.packageInfo.put("Mapper", this.joinPackage(packageConfig.getParent(), packageConfig.getMapper()));
-        this.packageInfo.put("Xml", this.joinPackage(packageConfig.getParent(), packageConfig.getXml()));
+        this.packageInfo.put("Xml", packageConfig.getMapper());
         this.packageInfo.put("Service", this.joinPackage(packageConfig.getParent(), packageConfig.getService()));
         this.packageInfo.put("ServiceImpl", this.joinPackage(packageConfig.getParent(), packageConfig.getServiceImpl()));
         this.packageInfo.put("Controller", this.joinPackage(packageConfig.getParent(), packageConfig.getController()));
@@ -151,7 +151,8 @@ public class ConfigBuilder {
     private void handlerSingleModulePackage(TemplateConfig template, String outputDir) {
         this.setPathInfo(this.pathInfo, template.getEntity(this.getGlobalConfig().isKotlin()), outputDir, "entity_path", "Entity");
         this.setPathInfo(this.pathInfo, template.getMapper(), outputDir, "mapper_path", "Mapper");
-        this.setPathInfo(this.pathInfo, template.getXml(), outputDir, "xml_path", "Xml");
+        String xmlOutputDir = globalConfig.getOutputDir() + Constants.RESOURCE_SRC_ROOT;
+        this.setPathInfo(this.pathInfo, template.getXml(), xmlOutputDir, "xml_path", "Xml");
         this.setPathInfo(this.pathInfo, template.getService(), outputDir, "service_path", "Service");
         this.setPathInfo(this.pathInfo, template.getServiceImpl(), outputDir, "service_impl_path", "ServiceImpl");
         this.setPathInfo(this.pathInfo, template.getController(), outputDir, "controller_path", "Controller");
@@ -160,7 +161,7 @@ public class ConfigBuilder {
     private void handlerMultiModulePackage(TemplateConfig template, DefaultGlobalConfig globalConfig) {
         this.setPathInfo(this.pathInfo, template.getEntity(this.getGlobalConfig().isKotlin()), globalConfig.getModuleJavaSrcPath(Module.entity), "entity_path", "Entity");
         this.setPathInfo(this.pathInfo, template.getMapper(), globalConfig.getModuleJavaSrcPath(Module.mapper), "mapper_path", "Mapper");
-        this.setPathInfo(this.pathInfo, template.getXml(), globalConfig.getModuleJavaSrcPath(Module.mapper), "xml_path", "Xml");
+        this.setPathInfo(this.pathInfo, template.getXml(), globalConfig.getModuleResourceSrcPath(Module.xml), "xml_path", "Xml");
         this.setPathInfo(this.pathInfo, template.getService(), globalConfig.getModuleJavaSrcPath(Module.service), "service_path", "Service");
         this.setPathInfo(this.pathInfo, template.getServiceImpl(), globalConfig.getModuleJavaSrcPath(Module.service_impl), "service_impl_path", "ServiceImpl");
         this.setPathInfo(this.pathInfo, template.getController(), globalConfig.getModuleJavaSrcPath(Module.controller), "controller_path", "Controller");
@@ -241,7 +242,7 @@ public class ConfigBuilder {
             if (StringUtils.isNotBlank(this.globalConfig.getServiceName())) {
                 tableInfo.setServiceName(String.format(this.globalConfig.getServiceName(), entityName));
             } else {
-                tableInfo.setServiceName("I" + entityName + "Service");
+                tableInfo.setServiceName(entityName + "Service");
             }
 
             if (StringUtils.isNotBlank(this.globalConfig.getServiceImplName())) {

@@ -16,7 +16,7 @@
 </#if>
 </#list>
 <#list table.commonFields as field><#--生成公共字段 -->
-    <result column="${field.name}" property="${field.propertyName}" />
+        <result column="${field.name}" property="${field.propertyName}" />
 </#list>
 <#list table.fields as field>
 <#if !field.keyFlag><#--生成普通字段 -->
@@ -35,5 +35,40 @@
         ${table.fieldNames}
     </sql>
 
+    <select id="listPage" resultType="${package.Entity}.${entity}">
+        select <include refid="Base_Column_List"></include> from ${table.name} t
+        <where>
+            <#list table.fields as field>
+                <#if !field.keyFlag><#--生成普通字段 -->
+                    <#if field.propertyType == "String">
+            <if test="p.${field.propertyName} != null and p.${field.propertyName} != ''">
+                    <#else>
+            <if test="p.${field.propertyName} != null">
+                    </#if>
+                and t.${field.name} = <#noparse>#{p.</#noparse>${field.propertyName}}
+            </if>
+                </#if>
+            </#list>
+        </where>
+        order by t.id desc
+    </select>
+
+    <select id="listAll" resultType="${package.Entity}.${entity}">
+        select <include refid="Base_Column_List"></include> from ${table.name} t
+        <where>
+            <#list table.fields as field>
+            <#if !field.keyFlag><#--生成普通字段 -->
+            <#if field.propertyType == "String">
+            <if test="p.${field.propertyName} != null and p.${field.propertyName} != ''">
+                <#else>
+                <if test="p.${field.propertyName} != null">
+                    </#if>
+                    and t.${field.name} = <#noparse>#{p.</#noparse>${field.propertyName}}
+                </if>
+                </#if>
+                </#list>
+        </where>
+        order by t.id desc
+    </select>
 </#if>
 </mapper>

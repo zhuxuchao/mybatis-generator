@@ -1,26 +1,21 @@
 package com.zhuxc.mybatisplus.generator;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.zhuxc.mybatisplus.generator.config.DefaultDataSourceConfig;
 import com.zhuxc.mybatisplus.generator.config.DefaultGlobalConfig;
 import com.zhuxc.mybatisplus.generator.config.DefaultPackageConfig;
 import com.zhuxc.mybatisplus.generator.config.DefaultStrategyConfig;
 import com.zhuxc.mybatisplus.generator.config.builder.ConfigBuilder;
-import com.zhuxc.mybatisplus.generator.consts.Module;
 import com.zhuxc.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class GeneratorApplicationTests {
+public class GeneratorApplicationTests {
 
     @Autowired
     private DefaultGlobalConfig globalConfig;
@@ -30,11 +25,6 @@ class GeneratorApplicationTests {
     private DefaultStrategyConfig strategyConfig;
     @Autowired
     private DefaultDataSourceConfig dataSourceConfig;
-
-
-    @Test
-    void contextLoads() {
-    }
 
     @Test
     public void generate() {

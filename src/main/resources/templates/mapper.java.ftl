@@ -2,6 +2,9 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 /**
  * <p>
@@ -15,6 +18,8 @@ import ${superMapperClassPackage};
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+    Page<${entity}> listPage(Page<${entity}> page, @Param("p") ${entity} ${entity?lower_case});
 
+    List<${entity}> listAll(${entity} ${entity?lower_case});
 }
 </#if>

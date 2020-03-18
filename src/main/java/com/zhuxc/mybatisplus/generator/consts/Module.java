@@ -7,6 +7,7 @@ package com.zhuxc.mybatisplus.generator.consts;
 public enum Module {
     entity,
     mapper,
+    xml,
     service,
     service_impl,
     controller;

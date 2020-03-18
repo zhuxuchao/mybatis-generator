@@ -1,20 +1,27 @@
 generator:
   strategy:
     config:
-      table-prefix: t_
-      include: t_member,t_member_car
+      table-prefix: t_sys_,t_bus_
+      include:
+      super-entity-class: com.maoface.share.common.Entity
   global:
     config:
       author: zhuxuchao
-      module-prefix: video-
-      multi-module: true
+#      module-prefix: video-
+      multi-module: false
       open: false
+      fileOverride: true
+      swagger2: true
+      base-result-map: true
+      base-column-list: true
   package:
     config:
-      parent: com.zhuxc.video.ringtone
+      parent: com.maoface.share
   datasource:
     config:
-      url: jdbc:mysql://49.232.12.83:3306/xiche?useUnicode=true&useSSL=false&characterEncoding=utf8
-      username: root
-      password: wechat_mysql_83
+      url: jdbc:mysql://rm-m5e66r6o610j9l8noko.mysql.rds.aliyuncs.com:3306/share?useSSL=true
+      username: share
+      password: '!Q2w#E4r%T'
       driver-name: com.mysql.cj.jdbc.Driver
+
+
