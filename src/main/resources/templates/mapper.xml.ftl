@@ -59,12 +59,12 @@
             <#list table.fields as field>
             <#if !field.keyFlag><#--生成普通字段 -->
             <#if field.propertyType == "String">
-            <if test="p.${field.propertyName} != null and p.${field.propertyName} != ''">
+            <if test="${field.propertyName} != null and ${field.propertyName} != ''">
                 <#else>
-                <if test="p.${field.propertyName} != null">
+            <if test="${field.propertyName} != null">
                     </#if>
-                    and t.${field.name} = <#noparse>#{p.</#noparse>${field.propertyName}}
-                </if>
+                and t.${field.name} = <#noparse>#{</#noparse>${field.propertyName}}
+            </if>
                 </#if>
                 </#list>
         </where>
